@@ -36,10 +36,8 @@ while enough_resource:
     # TODO 3: Process Coins
     # TODO 4: Check transaction successful?
 
-    coffee_bank.make_payment(cost)
+    if coffee_bank.make_payment(cost):
 
     # TODO 5: Make Coffee.
-
-    coffee_machine.make_coffee(drink)
-
-    coffee_machine.report()
+        coffee_machine.make_coffee(drink)
+        coffee_machine.report()
