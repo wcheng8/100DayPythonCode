@@ -4,3 +4,5 @@
 
 15. Coffee Machine application
 16. Coffee Machine application with OOP 
+17. Quiz game
+18. Famous painting of random dots
