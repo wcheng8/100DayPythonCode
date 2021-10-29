@@ -6,3 +6,5 @@
 16. Coffee Machine application with OOP 
 17. Quiz game
 18. Famous painting of random dots
+19. Turtle Race!
+20. Classic Snake Game
