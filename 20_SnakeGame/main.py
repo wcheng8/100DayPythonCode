@@ -1,7 +1,8 @@
 import time
+from score import ScoreBoard
 from Snake import Snake
-from turtle import Turtle, Screen
-
+from turtle import Screen
+from food import Food
 
 screen = Screen()
 screen.setup(height = 600, width=600)
@@ -9,11 +10,10 @@ screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
 
-# TODO 1: Create the snake body
-
 snake = Snake()
+food = Food()
+score = ScoreBoard()
 
-# TODO 2: Move the snake
 game_on = True
 
 while game_on:
@@ -25,11 +25,18 @@ while game_on:
     screen.onkey(snake.down,"Down")
     screen.onkey(snake.left,"Left")
     screen.onkey(snake.right,"Right")
+    if snake.snake[0].distance(food) <= 15:
+        food.refresh()
+        score.add_score()
+        snake.grow_snake()
 
-# TODO 3: Create snake food
 # TODO 4: Detect collision with food
-# TODO 5: Create a scoreboard
-# TODO 6: Detect collision with wall
+
+    if snake.check_boundary() or snake.check_tail():
+        score.game_over()
+        game_on = False
+
+
 # TODO 7: Detect collision with tail
 
 screen.exitonclick()

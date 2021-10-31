@@ -1,20 +1,27 @@
 from turtle import Turtle
+
 MOVE_DISTANCE = 20
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+TESTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0),(-60, 0),(-80, 0),(-100, 0),(-120, 0)]
+
 
 class Snake:
     def __init__(self):
-        self.positions = STARTING_POSITIONS
+        self.positions = TESTING_POSITIONS
         self.snake = []
         self.create_snake()
 
     def create_snake(self):
         for position in self.positions:
-            segment = Turtle("square")
-            segment.penup()
+            segment = self.create_snake_block()
             segment.goto(position)
-            segment.color("white")
             self.snake.append(segment)
+
+    def create_snake_block(self):
+        segment = Turtle("square")
+        segment.penup()
+        segment.color("white")
+        return segment
 
     def move(self):
         for segment in range(len(self.snake) - 1, 0, -1):
@@ -38,3 +45,31 @@ class Snake:
     def right(self):
         if self.snake[0].heading() == 90 or self.snake[0].heading() == 270:
             self.snake[0].setheading(0)
+
+    def grow_snake(self):
+        segment = self.create_snake_block()
+        end_position = self.snake[-1].pos()
+        end_heading = self.snake[-1].heading()
+        if end_heading == 0:
+            segment.goto(end_position[0]-20, end_position[1])
+        if end_heading == 90:
+            segment.goto(end_position[0], end_position[0]-20)
+        if end_heading  == 180:
+            segment.goto(end_position[0]+20, end_position[1])
+        if end_heading == 270:
+            segment.goto(end_position[0], end_position[0] + 20)
+        self.snake.append(segment)
+
+    def check_boundary(self):
+        x_pos = self.snake[0].xcor()
+        y_pos = self.snake[0].ycor()
+        if x_pos >= 300 or x_pos <= -300 or y_pos >= 300 or y_pos <= -300:
+            return True
+        return False
+
+    def check_tail(self):
+        for snake_segment in self.snake[1:]:
+            if self.snake[0].distance(snake_segment) <= 19:
+                return True
+            return False
+
