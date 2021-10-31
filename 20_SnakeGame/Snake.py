@@ -49,15 +49,7 @@ class Snake:
     def grow_snake(self):
         segment = self.create_snake_block()
         end_position = self.snake[-1].pos()
-        end_heading = self.snake[-1].heading()
-        if end_heading == 0:
-            segment.goto(end_position[0]-20, end_position[1])
-        if end_heading == 90:
-            segment.goto(end_position[0], end_position[0]-20)
-        if end_heading  == 180:
-            segment.goto(end_position[0]+20, end_position[1])
-        if end_heading == 270:
-            segment.goto(end_position[0], end_position[0] + 20)
+        segment.goto(end_position[0], end_position[0])
         self.snake.append(segment)
 
     def check_boundary(self):
@@ -66,10 +58,4 @@ class Snake:
         if x_pos >= 300 or x_pos <= -300 or y_pos >= 300 or y_pos <= -300:
             return True
         return False
-
-    def check_tail(self):
-        for snake_segment in self.snake[1:]:
-            if self.snake[0].distance(snake_segment) <= 19:
-                return True
-            return False
 
