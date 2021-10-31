@@ -32,14 +32,12 @@ while game_on:
 
 # TODO 4: Detect collision with food
 
-    if snake.check_boundary() or snake.check_tail():
+    if snake.check_boundary():
         score.game_over()
         game_on = False
 
-    for segment in snake.snake:
-        if segment == snake.snake[0]:
-            pass
-        elif snake.snake[0].distance(segment) < 10:
+    for segment in snake.snake[1:]:
+        if snake.snake[0].distance(segment) < 10:
             score.game_over()
             game_on = False
 

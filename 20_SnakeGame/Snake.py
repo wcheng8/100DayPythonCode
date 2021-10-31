@@ -13,15 +13,14 @@ class Snake:
 
     def create_snake(self):
         for position in self.positions:
-            segment = self.create_snake_block()
-            segment.goto(position)
-            self.snake.append(segment)
+            self.add_snake_segment(position)
 
-    def create_snake_block(self):
+    def add_snake_segment(self,position):
         segment = Turtle("square")
-        segment.penup()
         segment.color("white")
-        return segment
+        segment.penup()
+        segment.goto(position)
+        self.snake.append(segment)
 
     def move(self):
         for segment in range(len(self.snake) - 1, 0, -1):
@@ -47,10 +46,8 @@ class Snake:
             self.snake[0].setheading(0)
 
     def grow_snake(self):
-        segment = self.create_snake_block()
         end_position = self.snake[-1].pos()
-        segment.goto(end_position[0], end_position[0])
-        self.snake.append(segment)
+        self.add_snake_segment(end_position)
 
     def check_boundary(self):
         x_pos = self.snake[0].xcor()
