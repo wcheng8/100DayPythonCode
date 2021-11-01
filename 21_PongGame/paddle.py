@@ -6,17 +6,23 @@ class Paddle(Turtle):
     def __init__(self):
         super().__init__()
 
-    def draw_block(self,position):
-        block = Turtle()
-        block.shape("square")
-        block.color("white")
-        block.penup()
-        block.goto(position)
-
     def draw_paddle_r(self):
-        for position in paddle_R:
-            self.draw_block(position)
+        self.shape("square")
+        self.color("white")
+        self.penup()
+        self.shapesize(stretch_len=1, stretch_wid=5)
+        self.goto(450,0)
 
     def draw_paddle_l(self):
-        for position in paddle_L:
-            self.draw_block(position)
+        self.shape("square")
+        self.color("white")
+        self.penup()
+        self.shapesize(stretch_len=1, stretch_wid=5)
+        self.goto(-450,0)
+
+
+    def mup(self):
+        self.goto(self.xcor(), self.ycor()+20)
+
+    def mdown(self):
+        self.goto(self.xcor(), self.ycor()-20)
