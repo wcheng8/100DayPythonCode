@@ -7,6 +7,7 @@
 17. Quiz game
 18. Famous painting of random dots
 19. Turtle Race!
-20. Classic Snake Game
-21. Pong Game
-22. Turtle Crossing
+20-21. Classic Snake Game
+22. Pong Game
+23. Turtle Crossing
+24. Mail Merge
