@@ -1,10 +1,27 @@
 from tkinter import *
 from Password import Password
 from tkinter import messagebox
+import random
+import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+def rand_pass():
+    password_entry.delete(0,'end')
+    pass_char_len = random.randint(3,4)
+    pass_sym_len = random.randint(2,3)
+    pass_num_len = random.randint(3,4)
+    password_letter = [chr(random.choice([random.randint(65,90), random.randint(97,122)])) for _ in range(pass_char_len)]
+    password_sym = [chr(random.randint(33,41)) for _ in range(pass_sym_len)]
+    password_num = [str(random.randint(0,9)) for _ in range(pass_num_len)]
+    password = password_num + password_letter + password_sym
+    random.shuffle(password)
+    pass_str = ''.join(password)
+    return pass_str
+
 def gen_pass():
-    pass
+    password = rand_pass()
+    pyperclip.copy(password)
+    password_entry.insert(0,password)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 # Save password to file
 def add_pass():
@@ -26,7 +43,7 @@ def add_pass():
         reset()
 
 def pass_len_verify(new_pass):
-    if len(new_pass.password) >= 8:
+    if len(new_pass.password) >= 8 or len(new_pass.site):
         return True
     return False
 
