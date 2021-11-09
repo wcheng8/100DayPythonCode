@@ -13,3 +13,8 @@
 24. Mail Merge
 25. US States guess game
 26. Nato Alphabet Generator
+27. Tkinter GUI Converter
+28. Pomodoro Clock
+29. Password Manager
+31. Flash Card
+32. SMTP Birthday Email Automater

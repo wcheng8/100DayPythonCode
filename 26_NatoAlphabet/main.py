@@ -11,8 +11,13 @@ for (index, code) in alphabet_df.iterrows():
 # print(phonetic_list)
 
 #TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-
-word = input("Input the text you want to turn into phonetic code? ")
+accepted_word = True
 # Use list comprehension to output phonetic word
-phonetic_word = [phonetic_list[letter] for letter in word.upper()]
-print(phonetic_word)
+while accepted_word:
+    try:
+        word = input("Input the text you want to turn into phonetic code? ")
+        phonetic_word = [phonetic_list[letter] for letter in word.upper()]
+        print(phonetic_word)
+        accepted_word = False
+    except KeyError:
+        print("Only letter of the alphabets are accepted. Please enter again")
