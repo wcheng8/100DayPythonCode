@@ -8,7 +8,10 @@ FONT_WORD = ('Ariel',60,'bold')
 all_flashcards = []
 current_card = {}
 # Get Flashcard data from csv and populate data
-data = pd.read_csv('./data/french_words.csv')
+try:
+    data = pd.read_csv('./data/new_words_to_learn.csv')
+except FileNotFoundError:
+    data = pd.read_csv('./data/french_words.csv')
 for index, pair in data.iterrows():
     new_flashcard = flashcard(index, pair['French'], pair['English'])
     all_flashcards.append(new_flashcard)
