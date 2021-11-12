@@ -35,23 +35,31 @@ class QuizInterface:
         self.window.mainloop()
 
     def next_question(self):
+        self.canvas.config(bg="white")
         question = self.quiz_brain.next_question()
         self.canvas.itemconfig(self.question, text=f'{question}')
 
     def true(self):
-        if self.quiz_brain.check_answer('True') and self.quiz_brain.still_has_questions():
-            self.score += 10
-            self.score_txt.config(text=f'Score: {self.score}')
-
+        if self.quiz_brain.still_has_questions():
+            self.give_feedback(self.quiz_brain.check_answer('True'))
         self.check_still_has_question_print_score()
 
     def false(self):
+        if self.quiz_brain.still_has_questions():
+            self.give_feedback(self.quiz_brain.check_answer('False'))
         self.check_still_has_question_print_score()
 
     def check_still_has_question_print_score(self):
         if self.quiz_brain.still_has_questions():
-            self.next_question()
+            self.score_txt.config(text=f'Score: {self.quiz_brain.score}0')
+            self.window.after(1000,self.next_question)
         else:
             no_of_questions = self.quiz_brain.question_number
             question_correct = self.quiz_brain.score
-            self.canvas.itemconfig(self.question,text=f'You obtained a final score of {self.score}.\nYou got {question_correct}/{no_of_questions} questions correct!')
+            self.canvas.itemconfig(self.question,text=f'You obtained a final score of {self.quiz_brain.score}0.\nYou got {question_correct}/{no_of_questions} questions correct!')
+
+    def give_feedback(self, is_right):
+        if is_right:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
