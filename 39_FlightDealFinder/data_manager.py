@@ -7,22 +7,20 @@ from datetime import datetime
 load_dotenv('../.env')
 
 SHEETY_AUTH_TOKEN2 = os.getenv('SHEETY_AUTH_TOKEN2')
-SHEETY_URL = 'https://api.sheety.co/d75e55864dbd2bd91cc468ff28a8f34f/flightDetails/sheet1'
+SHEETY_URL = 'https://api.sheety.co/d75e55864dbd2bd91cc468ff28a8f34f/flightDetails/flights'
 FLIGHT_API = os.getenv('FLIGHTTEQ_API_KEY')
 
 class DataManager:
     def __init__(self):
-        self.locations_code = {}
-        self.locations_code['country'] = {}
-        self.locations_code['ids'] = []
-        self.locations_code['countries_index'] = []
+        self.locations_dict = []
         self.headers = {
             'Authorization': 'Bearer asdf123percenwcilk55'
         }
 
     def get_iataCode(self):
         req = requests.get(url=f'{SHEETY_URL}',headers=self.headers)
-        country_data = req.json()['sheet1']
+        country_data = req.json()['flights']
+        print(country_data)
         country_list = []
         row_ids = []
         for country in country_data:
@@ -46,17 +44,20 @@ class DataManager:
 
         print(iaTa_list)
 
-        index = 0
-        for code in iaTa_list:
-            id = row_ids[index]
+        for index in range(len(country_list)):
+            flight_details = {'country': country_list[index], 'iaTaCode': iaTa_list[index], 'id': row_ids[index]}
+            self.locations_dict.append(flight_details)
+
+        print(self.locations_dict)
+
+        for country in self.locations_dict:
             edit_row = {
-                'sheet1':{
-                    'Price': f'{code}'
+                'flight':{
+                    'iaTaCode': f'{country["iaTaCode"]}'
                 }
             }
-            edit_req = requests.put(url = f'{SHEETY_URL}/{id}', headers=self.headers, json=edit_row)
+            edit_req = requests.put(url = f'{SHEETY_URL}/{country["id"]}', headers=self.headers, json=edit_row)
             print(edit_req.json())
-            index +=1
 
     def get_country(self):
         req = requests.get(url=f'{SHEETY_URL}',headers=self.headers)
@@ -73,8 +74,9 @@ class DataManager:
         for country_number in range(len(self.locations_code['ids'])):
             iaTaCode = self.locations_code['countries_index'][country_number]
             new_flight = FlightSearch(iaTaCode)
-            min_price = FlightData(new_flight.search()).min_price
-            self.locations_code['country'][iaTaCode] = min_price
+            flight_object = FlightData(new_flight.search())
+            self.locations_code['country'][iaTaCode] = flight_object.min_price
+            self.locations_code['country'][iaTaCode] = flight_object.local_departure
         print(self.locations_code)
 
     def write_price(self):

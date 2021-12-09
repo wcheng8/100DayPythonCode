@@ -7,7 +7,8 @@
 17. Quiz game
 18. Famous painting of random dots
 19. Turtle Race!
-20. -21. Classic Snake Game
+20. Classic Snake Game 
+21. Classic Snake Game (cont.)
 22. Pong Game
 23. Turtle Crossing
 24. Mail Merge
@@ -20,3 +21,10 @@
 32. SMTP Birthday Email Automater
 33. ISS API
 34. QuitIt
+35. SMS Twillio
+36. Stock Trading
+37. Habit Tracker
+38. Workout Tracker Google Sheets
+39. Flight Deal
+40. Flight Deal (cont.)
+45. Movie Scraper
