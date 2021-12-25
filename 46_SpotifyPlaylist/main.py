@@ -32,8 +32,8 @@ sp = spotipy.Spotify(
         redirect_uri='http://example.com',
         client_id=SPOTIPY_CLIENT_ID,
         client_secret=SPOTIPY_CLIENT_SECRET,
-        show_dialog=True,
-        cache_path='token.txt'
+        show_dialog=True
+
     )
 )
 
