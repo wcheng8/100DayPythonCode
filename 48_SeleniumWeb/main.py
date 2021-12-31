@@ -36,7 +36,11 @@ while True:
     print(cookie_upg_dict)
 
     # Get money count (cookie)
-    money = int(driver.find_element(By.ID, 'money').text)
+    money = driver.find_element(By.ID, 'money').text
+    if ',' in money:
+        money = int(money.replace(',',''))
+    else:
+        money = int(money)
     print(money)
     # Find upgrades that you are able to afford
     afford_upg = []
