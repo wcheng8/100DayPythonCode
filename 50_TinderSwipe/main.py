@@ -27,7 +27,15 @@ fb_login.click()
 fb_login_window = driver.window_handles[1]
 print(fb_login_window)
 
-## Start here cant switch window
-driver.switch_to_window(fb_login_window)
+driver.switch_to.window(fb_login_window)
 print(driver.title)
 
+email = driver.find_element(By.ID, 'email')
+password = driver.find_element(By.ID, 'pass')
+fb_login_btn = driver.find_element(By.XPATH, '//*[@id="u_0_0_Bk"]')
+
+email.send_keys(TINDER_USER)
+password.send_keys(TINDER_PASS)
+fb_login_btn.click()
+
+## Start here
